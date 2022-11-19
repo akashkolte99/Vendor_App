@@ -36,19 +36,19 @@ public class ProductController {
 	private BankDetailsServiceIntr bService;
 	
 	@PostMapping(value = "/vendor/products/{vId}")
-	public ResponseEntity<Product> saveVendorBankDetails(@PathVariable("vId") Integer vId, @RequestBody ProductDTO product){
+	public ResponseEntity<Product> saveVendorProduct(@PathVariable("vId") Integer vId, @RequestBody ProductDTO product){
 		Product c = pService.saveProduct(vId, product);	
 		return new ResponseEntity<Product>(c,HttpStatus.CREATED);
 	}
 	
 	@PutMapping(value = "/vendor/products/{id}")
-	public ResponseEntity<Product> updateVendorBankDetails(@PathVariable("id") Integer id, @RequestBody ProductDTO product){
+	public ResponseEntity<Product> updateVendorProducts(@PathVariable("id") Integer id, @RequestBody ProductDTO product){
 		Product c = pService.updateProduct(id, product);	
 		return new ResponseEntity<Product>(c,HttpStatus.ACCEPTED);
 	}
 	
 	@GetMapping(value = "/vendor/products/{name}")
-	public ResponseEntity<List<ProductResponseDto>> getVendorBankDetails(@PathVariable("name") String name){
+	public ResponseEntity<List<ProductResponseDto>> getVendorBankProduct(@PathVariable("name") String name){
 		List<ProductResponseDto> vlist = pService.poductsByName(name);	
 		return new ResponseEntity<List<ProductResponseDto>>(vlist,HttpStatus.ACCEPTED);
 	}

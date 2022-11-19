@@ -49,7 +49,7 @@ public class VendorServiceImpl implements VendorServiceIntr{
 	@Override
 	public List<VendorResponseDto> getVendorByName(String vendorName) {
 		// TODO Auto-generated method stub
-		List<Vendor> vlist =  vDao.findByVendorName(vendorName);
+		List<Vendor> vlist =  vDao.searchByNameLike(vendorName);
 		if(vlist.isEmpty()) {
 			throw new NotFoundException("No Vender Found With This Name");
 		}
