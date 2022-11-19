@@ -10,7 +10,7 @@ import com.masai.entities.BankDetails;
 @Service
 public interface BankDetailsServiceIntr {
 
-	public BankDetails addBankToVendor(Integer vId,BankDetailsDTO bank);
+	public BankDetailsDTO addBankToVendor(Integer vId,BankDetailsDTO bank);
 	
 	public BankDetails updateBankToVendor(Integer bId,BankDetailsDTO bank);
 	

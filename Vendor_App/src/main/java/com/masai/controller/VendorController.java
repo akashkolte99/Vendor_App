@@ -57,19 +57,13 @@ public class VendorController {
 		List<VendorResponseDto> vlist = vService.getVendorByCity(city);	
 		return new ResponseEntity<List<VendorResponseDto>>(vlist,HttpStatus.ACCEPTED);
 	}
-	//contact
-	@PostMapping(value = "/vendor/contact/{vId}/{contact}")
-	public ResponseEntity<String> saveVendorContactDetails(@PathVariable("vId") Integer vId,@PathVariable("contact") String contact){
-		String c = cService.addContact(vId, contact);	
-		return new ResponseEntity<String>(c,HttpStatus.CREATED);
-	}
 	
-	@GetMapping(value = "/vendor/contacts/{id}")
-	public ResponseEntity<List<Contacts>> getVendorContacts(@PathVariable("id") Integer id){
-		List<Contacts> vlist = cService.getContactsOfVendor(id);	
-		return new ResponseEntity<List<Contacts>>(vlist,HttpStatus.ACCEPTED);
-	}
 	
+	@GetMapping(value = "/vendor")
+	public ResponseEntity<List<Vendor>> getVendorDetails(){
+		List<Vendor> vlist = vService.getVendorList();	
+		return new ResponseEntity<List<Vendor>>(vlist,HttpStatus.ACCEPTED);
+	}
 	
 	
 }

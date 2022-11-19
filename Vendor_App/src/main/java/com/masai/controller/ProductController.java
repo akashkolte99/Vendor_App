@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.DTO.BankDetailsDTO;
 import com.masai.DTO.ProductDTO;
-import com.masai.DTO.ProductResponseDto;
+//import com.masai.DTO.ProductResponseDto;
+import com.masai.DTO.VendorResponseDto;
 import com.masai.entities.BankDetails;
 import com.masai.entities.Product;
 import com.masai.service.AddressServiceaIntr;
@@ -36,9 +37,9 @@ public class ProductController {
 	private BankDetailsServiceIntr bService;
 	
 	@PostMapping(value = "/vendor/products/{vId}")
-	public ResponseEntity<Product> saveVendorProduct(@PathVariable("vId") Integer vId, @RequestBody ProductDTO product){
-		Product c = pService.saveProduct(vId, product);	
-		return new ResponseEntity<Product>(c,HttpStatus.CREATED);
+	public ResponseEntity<ProductDTO> saveVendorProduct(@PathVariable("vId") Integer vId, @RequestBody ProductDTO product){
+		ProductDTO c = pService.saveProduct(vId, product);	
+		return new ResponseEntity<ProductDTO>(c,HttpStatus.CREATED);
 	}
 	
 	@PutMapping(value = "/vendor/products/{id}")
@@ -48,8 +49,8 @@ public class ProductController {
 	}
 	
 	@GetMapping(value = "/vendor/products/{name}")
-	public ResponseEntity<List<ProductResponseDto>> getVendorBankProduct(@PathVariable("name") String name){
-		List<ProductResponseDto> vlist = pService.poductsByName(name);	
-		return new ResponseEntity<List<ProductResponseDto>>(vlist,HttpStatus.ACCEPTED);
+	public ResponseEntity<List<VendorResponseDto>> getVendorProduct(@PathVariable("name") String name){
+		List<VendorResponseDto> vlist = pService.poductsByName(name);	
+		return new ResponseEntity<List<VendorResponseDto>>(vlist,HttpStatus.ACCEPTED);
 	}
 }

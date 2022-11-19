@@ -8,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.masai.DTO.ProductDTO;
-import com.masai.DTO.ProductResponseDto;
+
+import com.masai.DTO.VendorResponseDto;
 import com.masai.entities.Product;
 import com.masai.entities.Vendor;
 import com.masai.exception.NotFoundException;
@@ -28,7 +29,7 @@ public class ProductServiceImpl implements ProductServiceIntr{
 	
 	
 	@Override
-	public Product saveProduct(Integer vId, ProductDTO product) {
+	public ProductDTO saveProduct(Integer vId, ProductDTO product) {
 		// TODO Auto-generated method stub
         Optional<Vendor> opt = vDao.findById(vId);
 		
@@ -42,10 +43,10 @@ public class ProductServiceImpl implements ProductServiceIntr{
 		p.setProductName(product.getProductName());
 		p.setDescription(product.getDescription());
 		p.setPrice(product.getPrice());
-		p.getVendorList().add(v);
+		p.setVendor(v);
 		v.getProductList().add(p);
 		vDao.save(v);
-		return p;
+		return product;
 	}
 
 	@Override
@@ -64,20 +65,22 @@ public class ProductServiceImpl implements ProductServiceIntr{
 	}
 
 	@Override
-	public List<ProductResponseDto> poductsByName(String productname) {
+	public List<VendorResponseDto> poductsByName(String productname) {
 		// TODO Auto-generated method stub
 		List<Product> plist = pDao.searchByNameLike(productname);
 		if(plist.isEmpty()) {
 			throw new NotFoundException("Product With This Name Is Not Found");
 		}
 		
-		List<ProductResponseDto> prdplist= new ArrayList<>();
+		List<VendorResponseDto> prdplist= new ArrayList<>();
 		for(Product p : plist) {
-			ProductResponseDto pr = new ProductResponseDto();
-			pr.setPId(p.getProductId());
-			pr.setProductName(p.getProductName());
-			pr.getVlist().addAll(p.getVendorList());
-			prdplist.add(pr);
+			Vendor v = p.getVendor();
+			VendorResponseDto vr = new VendorResponseDto();
+			vr.setVendorId(v.getVId());
+			vr.setVendorName(v.getVendorName());
+			vr.setPlist(v.getProductList());
+			
+			prdplist.add(vr);
 		}
 		
 		return prdplist;

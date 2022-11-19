@@ -88,4 +88,14 @@ public class VendorServiceImpl implements VendorServiceIntr{
 		return vrplists;
 	}
 
+	@Override
+	public List<Vendor> getVendorList() {
+		// TODO Auto-generated method stub
+		List<Vendor> v = vDao.findAll();
+		if(v.isEmpty()) {
+			throw new NotFoundException("There Is No Vendor Found");
+		}
+		return v;
+	}
+
 }

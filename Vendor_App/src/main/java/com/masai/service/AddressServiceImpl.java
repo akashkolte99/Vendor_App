@@ -23,7 +23,7 @@ public class AddressServiceImpl implements AddressServiceaIntr{
 	private AddressDAO aDao;
 	
 	@Override
-	public Address addAddress(Integer vId,AddressDTO address) {
+	public AddressDTO addAddress(Integer vId,AddressDTO address) {
 		// TODO Auto-generated method stub
 		Address a = new Address();
 		a.setCity(address.getCity());
@@ -40,7 +40,7 @@ public class AddressServiceImpl implements AddressServiceaIntr{
 		v.getAddressList().add(a);
 		a.setVendor(v);
 		vDao.save(v);
-		return a;
+		return address;
 	}
 
 	@Override

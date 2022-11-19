@@ -31,7 +31,7 @@ public class Product {
 	private String price;
 	
 	@JsonIgnore
-	@ManyToMany
-	private List<Vendor> vendorList = new ArrayList<>();
+	@ManyToOne
+	private Vendor vendor;
 	
 }

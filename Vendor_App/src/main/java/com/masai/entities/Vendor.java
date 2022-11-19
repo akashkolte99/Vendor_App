@@ -35,6 +35,6 @@ public class Vendor {
 	@OneToMany(cascade = CascadeType.ALL , mappedBy = "vendor")
 	private List<Contacts> contactList = new ArrayList<>();
 	
-	@ManyToMany(cascade = CascadeType.ALL , mappedBy = "vendorList")
+	@OneToMany(cascade = CascadeType.ALL , mappedBy = "vendor")
 	private List<Product> productList = new ArrayList<>();
 }

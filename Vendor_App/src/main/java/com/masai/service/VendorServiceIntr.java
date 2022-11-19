@@ -16,4 +16,7 @@ public interface VendorServiceIntr {
 	public List<VendorResponseDto> getVendorByName(String vendorName);
 	
 	public List<VendorResponseDto> getVendorByCity(String city);
+	
+	public List<Vendor> getVendorList();
+
 }

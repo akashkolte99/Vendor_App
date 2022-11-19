@@ -39,9 +39,9 @@ public class BankDetailsController {
 	// bankdetails
 	
 	@PostMapping(value = "/vendor/bankdetails/{vId}")
-	public ResponseEntity<BankDetails> saveVendorBankDetails(@PathVariable("vId") Integer vId, @RequestBody BankDetailsDTO bank){
-		BankDetails c = bService.addBankToVendor(vId, bank);	
-		return new ResponseEntity<BankDetails>(c,HttpStatus.CREATED);
+	public ResponseEntity<BankDetailsDTO> saveVendorBankDetails(@PathVariable("vId") Integer vId, @RequestBody BankDetailsDTO bank){
+		BankDetailsDTO c = bService.addBankToVendor(vId, bank);	
+		return new ResponseEntity<BankDetailsDTO>(c,HttpStatus.CREATED);
 	}
 	
 	@PutMapping(value = "/vendor/bankdetails/{id}")

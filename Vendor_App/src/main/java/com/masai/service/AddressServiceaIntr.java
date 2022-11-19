@@ -10,7 +10,7 @@ import com.masai.entities.Address;
 @Service
 public interface AddressServiceaIntr {
 
-	public Address addAddress(Integer vId,AddressDTO address);
+	public AddressDTO addAddress(Integer vId,AddressDTO address);
 	
 	public Address updateAddress(Integer vId,AddressDTO address);
 	

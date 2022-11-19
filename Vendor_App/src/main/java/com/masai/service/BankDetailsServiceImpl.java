@@ -27,7 +27,7 @@ public class BankDetailsServiceImpl  implements BankDetailsServiceIntr{
 	private BankDetailsDAO bDao;
 	
 	@Override
-	public BankDetails addBankToVendor(Integer vId,BankDetailsDTO bank) {
+	public BankDetailsDTO addBankToVendor(Integer vId,BankDetailsDTO bank) {
 		// TODO Auto-generated method stub
         Optional<Vendor> opt = vDao.findById(vId);
 		
@@ -44,7 +44,7 @@ public class BankDetailsServiceImpl  implements BankDetailsServiceIntr{
 		v.getBankList().add(b);
 		vDao.save(v);
 		
-		return b;
+		return bank;
 	}
 
 	@Override

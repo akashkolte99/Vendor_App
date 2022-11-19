@@ -38,9 +38,9 @@ public class AddressController {
 
 	//address
 	@PostMapping(value = "/vendor/address/{vId}")
-	public ResponseEntity<Address> saveVendorAddressDetails(@PathVariable("vId") Integer vId, @RequestBody AddressDTO address){
-		Address c = aService.addAddress(vId, address);	
-		return new ResponseEntity<Address>(c,HttpStatus.CREATED);
+	public ResponseEntity<AddressDTO> saveVendorAddressDetails(@PathVariable("vId") Integer vId, @RequestBody AddressDTO address){
+		AddressDTO c = aService.addAddress(vId, address);	
+		return new ResponseEntity<AddressDTO>(c,HttpStatus.CREATED);
 	}
 	
 	@PutMapping(value = "/vendor/address/{id}")
