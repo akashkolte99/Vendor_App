@@ -10,9 +10,11 @@ import com.masai.DTO.VendorDTO;
 import com.masai.DTO.VendorResponseDto;
 import com.masai.entities.Address;
 import com.masai.entities.Contacts;
+import com.masai.entities.Product;
 import com.masai.entities.Vendor;
 import com.masai.exception.NotFoundException;
 import com.masai.repository.AddressDAO;
+import com.masai.repository.ProductDAO;
 import com.masai.repository.VendorDAO;
 
 @Service
@@ -24,6 +26,8 @@ public class VendorServiceImpl implements VendorServiceIntr{
 	@Autowired
 	private AddressDAO aDao;
 	
+	@Autowired
+	private ProductDAO pDao;
 	@Override
 	public Vendor createVendor(VendorDTO vendor) {
 		// TODO Auto-generated method stub
@@ -60,6 +64,25 @@ public class VendorServiceImpl implements VendorServiceIntr{
 			vr.setVendorName(v.getVendorName());
 			vr.getPlist().addAll(v.getProductList());
 			
+			vrplists.add(vr);
+		}
+		return vrplists;
+	}
+	
+	@Override
+	public List<VendorResponseDto> getVendorByCity(String city) {
+		// TODO Auto-generated method stub
+		List<Address> alist = aDao.findByCity(city);
+		if(alist.isEmpty()) {
+			throw new NotFoundException("No Vender Found In This City");
+		}
+		List<VendorResponseDto> vrplists = new ArrayList<>();
+		for(Address a : alist) {
+			VendorResponseDto vr = new VendorResponseDto();
+			Vendor v = a.getVendor();
+			vr.setVendorId(v.getVId());
+			vr.setVendorName(v.getVendorName());
+			vr.getPlist().addAll(v.getProductList());
 			vrplists.add(vr);
 		}
 		return vrplists;

@@ -46,12 +46,17 @@ public class VendorController {
 		Vendor v = vService.createVendor(vendor);	
 		return new ResponseEntity<Vendor>(v,HttpStatus.CREATED);
 	}
-	@GetMapping(value = "/vendor/{vendorName}")
+	@GetMapping(value = "/vendor/name/{vendorName}")
 	public ResponseEntity<List<VendorResponseDto>> getVendorDetailsByName(@PathVariable("vendorName") String vendorName){
 		List<VendorResponseDto> vlist = vService.getVendorByName(vendorName);	
 		return new ResponseEntity<List<VendorResponseDto>>(vlist,HttpStatus.ACCEPTED);
 	}
 	
+	@GetMapping(value = "/vendor/city/{city}")
+	public ResponseEntity<List<VendorResponseDto>> getVendorDetailsByCity(@PathVariable("city") String city){
+		List<VendorResponseDto> vlist = vService.getVendorByCity(city);	
+		return new ResponseEntity<List<VendorResponseDto>>(vlist,HttpStatus.ACCEPTED);
+	}
 	//contact
 	@PostMapping(value = "/vendor/contact/{vId}/{contact}")
 	public ResponseEntity<String> saveVendorContactDetails(@PathVariable("vId") Integer vId,@PathVariable("contact") String contact){
@@ -66,42 +71,5 @@ public class VendorController {
 	}
 	
 	
-	//address
-	@PostMapping(value = "/vendor/address/{vId}")
-	public ResponseEntity<Address> saveVendorAddressDetails(@PathVariable("vId") Integer vId, @RequestBody AddressDTO address){
-		Address c = aService.addAddress(vId, address);	
-		return new ResponseEntity<Address>(c,HttpStatus.CREATED);
-	}
 	
-	@PutMapping(value = "/vendor/address/{id}")
-	public ResponseEntity<Address> updateVendorAddressDetails(@PathVariable("id") Integer id, @RequestBody AddressDTO address){
-		Address c = aService.updateAddress(id, address);	
-		return new ResponseEntity<Address>(c,HttpStatus.ACCEPTED);
-	}
-	
-	@GetMapping(value = "/vendor/address/{id}")
-	public ResponseEntity<List<Address>> getVendorAddressDetails(@PathVariable("id") Integer id){
-		List<Address> vlist = aService.getAddress(id);	
-		return new ResponseEntity<List<Address>>(vlist,HttpStatus.ACCEPTED);
-	}
-	
-	// bankdetails
-	
-	@PostMapping(value = "/vendor/bankdetails/{vId}")
-	public ResponseEntity<BankDetails> saveVendorBankDetails(@PathVariable("vId") Integer vId, @RequestBody BankDetailsDTO bank){
-		BankDetails c = bService.addBankToVendor(vId, bank);	
-		return new ResponseEntity<BankDetails>(c,HttpStatus.CREATED);
-	}
-	
-	@PutMapping(value = "/vendor/bankdetails/{id}")
-	public ResponseEntity<BankDetails> updateVendorBankDetails(@PathVariable("id") Integer id, @RequestBody BankDetailsDTO bank){
-		BankDetails c = bService.updateBankToVendor(id, bank);	
-		return new ResponseEntity<BankDetails>(c,HttpStatus.ACCEPTED);
-	}
-	
-	@GetMapping(value = "/vendor/bankdetails/{id}")
-	public ResponseEntity<List<BankDetails>> getVendorBankDetails(@PathVariable("id") Integer id){
-		List<BankDetails> vlist = bService.getBankDetailsByVendorId(id);	
-		return new ResponseEntity<List<BankDetails>>(vlist,HttpStatus.ACCEPTED);
-	}
 }
